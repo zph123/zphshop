@@ -74,8 +74,7 @@
 			dataType:'json',
 			success:function(res){
 				console.log(res)	
-				
-
+				getToken()
 				if (res.status=='ok') {
 					$('#up_span').html()
 					$("#modal-demo").modal("hide")

@@ -62,22 +62,22 @@ class Permissioncate extends Common
         $arr=['code'=>'0','status'=>'ok','data'=>'删除成功','token'=>$token];
     	echo json_encode($arr);
     }
-    public function deleteMore()
-    {
-    	$id=Request::post('id');
-    	if (empty($id)) {
-    		 $arr=['code'=>'0','status'=>'error','data'=>'不能为空'];
-	    	echo json_encode($arr);
-	    	die;
-    	}
+    // public function deleteMore()
+    // {
+    // 	$id=Request::post('id');
+    // 	if (empty($id)) {
+    // 		 $arr=['code'=>'0','status'=>'error','data'=>'不能为空'];
+	   //  	echo json_encode($arr);
+	   //  	die;
+    // 	}
 
-    	$arr=explode(',', $id);
-    	array_shift($arr);
-    	$rbac= new Rbac();
-        $rbac->delPermissionCategory($arr);
-        $arr=['code'=>'0','status'=>'ok','data'=>'删除成功'];
-    	echo json_encode($arr);
-    }
+    // 	$arr=explode(',', $id);
+    // 	array_shift($arr);
+    // 	$rbac= new Rbac();
+    //     $rbac->delPermissionCategory($arr);
+    //     $arr=['code'=>'0','status'=>'ok','data'=>'删除成功'];
+    // 	echo json_encode($arr);
+    // }
     public function updateAction(){
     	$data=Request::post();
     	$validate = new \app\admin\validate\Permissioncate;
@@ -88,7 +88,8 @@ class Permissioncate extends Common
     	}
     	$rbac= new Rbac();
     	$getarr=$rbac->getPermissionCategory([['name', '=', $data['name']]]);
-	
+
+    	unset($data['__token__']);
 		if (empty($getarr)) {
     		Db::table('permission_category')->update($data);
     		$arr=['code'=>'0','status'=>'ok','data'=>'修改成功'];
